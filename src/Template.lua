@@ -29,7 +29,14 @@ local function tMerge(...)
 end
 
 ---@class Template
-local Template = {}
+local Template = {
+  --- Globals available for every template by default
+  globals = {
+    math = math,
+    table = table,
+    string = string,
+  }
+}
 
 -- Makes our template directly callable
 function Template.__call(self, ...)
@@ -44,7 +51,7 @@ function Template:render(vars)
   local _ = {}
 
   -- Creates our environment
-  local env = tMerge(self.globals or {}, vars or {}, {
+  local env = tMerge(Template.globals, self.globals or {}, vars or {}, {
     print = function (str) table.insert(_, tostring(str or '')) end,
   })
 
@@ -68,8 +75,8 @@ end
 function Template.new(source, globals)
   -- Creates our instance
   local self = {
-    source,
-    globals,
+    source = source,
+    globals = globals,
   }
 
   -- Parses direct printing of variables, we'll convert a {{var}} into {% print(var) %}
