@@ -71,8 +71,9 @@ end
 --- Creates a new template
 ---@param source string The code for your template
 ---@param globals table Global variables to be used on on the template
+---@param buildErrorHandler function A function to handle build errors, if none is found throws an error
 ---@return Template
-function Template.new(source, globals)
+function Template.new(source, globals, buildErrorHandler)
   -- Creates our instance
   local self = {
     source = source,
@@ -127,6 +128,13 @@ function Template.new(source, globals)
 
   -- Builds the Lua function
   self.code = table.concat(tPieces, '\n')
+
+  -- Checks our code for any errors
+  local _, err = load(self.code)
+  if err then
+    (buildErrorHandler or error)('Failed compiling template: ' .. err)
+    return nil
+  end
 
   -- Initializes our instance
   return setmetatable(self, Template)
