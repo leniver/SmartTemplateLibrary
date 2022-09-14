@@ -35,6 +35,8 @@ local Template = {
     math = math,
     table = table,
     string = string,
+    ipairs = ipairs,
+    pairs = pairs,
   }
 }
 
