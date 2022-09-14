@@ -62,7 +62,7 @@ function Template:render(vars)
   local result = table.concat(_, ''):gsub('%s+', ' ')
 
   -- Trims result
-  result = result:sub(result:find('%a') or 1):gsub('%s*$', '')
+  result = result:sub(result:find('[^%s]') or 1):gsub('%s*$', '')
 
   -- Done
   return result
