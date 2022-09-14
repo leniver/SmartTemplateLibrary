@@ -132,7 +132,13 @@ function Template.new(source, globals, buildErrorHandler)
   -- Checks our code for any errors
   local _, err = load(self.code)
   if err then
-    (buildErrorHandler or error)('Failed compiling template: ' .. err)
+    if buildErrorHandler then
+      buildErrorHandler(self, err)
+    else
+      error('Failed compiling template: ' .. err)
+    end
+
+    -- Retuns an invalid instance
     return nil
   end
 
