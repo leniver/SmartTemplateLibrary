@@ -1,0 +1,9 @@
+{
+  "cli": {
+    "fmtVersion": 3
+  },
+  "name": "@wolfe-labs/STL",
+  "description": "Smart Template Library (STL) is a simple, Twig-like templating language for Lua",
+  "sourcePath": "src",
+  "outputPath": "out"
+}
