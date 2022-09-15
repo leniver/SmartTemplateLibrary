@@ -82,6 +82,10 @@ local function buildValue(str, vars)
     return tostring(value)
 end
 
+---@param chars string[]
+---@param i number
+---@return string
+---@return number
 local function extractParenthese(chars, i)
     local endCount = 0
     local startCount = 0
@@ -106,6 +110,9 @@ local function extractParenthese(chars, i)
     return concat(expression), index + 1
 end
 
+---@param expression table
+---@param vars table
+---@return boolean
 local function evaluateExpression(expression, vars)
     local count = #expression
     if count == 0 then
@@ -166,6 +173,9 @@ function Expression.new(value, type)
     return self
 end
 
+---@param vars table
+---@param forceBoolean? boolean
+---@return boolean|string
 function Expression:eval(vars, forceBoolean)
     if self.__type == "boolean" then
         return self:evalBoolean(vars)
@@ -176,6 +186,8 @@ function Expression:eval(vars, forceBoolean)
     end
 end
 
+---@param vars table
+---@return boolean
 function Expression:evalBoolean(vars)
     local chars = {}
     for i in string.gmatch(self.__value, "(.)") do
@@ -261,6 +273,8 @@ function Expression:evalBoolean(vars)
     return true
 end
 
+---@param vars table
+---@return string
 function Expression:evalString(vars)
     return buildValue(self.__value, vars)
 end

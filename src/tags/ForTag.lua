@@ -15,7 +15,9 @@ function ForTag.new(name, arguments)
     return self
 end
 
-
+---@param tmpl string
+---@param vars table
+---@return string
 function ForTag:render(tmpl, vars)
     return "FOR BLOCK"
 end

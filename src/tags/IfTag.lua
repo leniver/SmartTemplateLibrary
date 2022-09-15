@@ -15,7 +15,9 @@ function IfTag.new(name, arguments)
     return self
 end
 
-
+---@param tmpl string
+---@param vars table
+---@return string
 function IfTag:render(tmpl, vars)
     local result = Expression.new(self.arguments):evalBoolean(vars)
 

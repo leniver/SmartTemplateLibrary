@@ -12,10 +12,12 @@ local BooleanEnum = {
     ["nil"] = false,
 }
 
+---@return string
 function string:trim()
   return self:gsub("^%s*(.-)%s*$", "%1")
 end
 
+---@return boolean
 function string:toBool()
     if BooleanEnum[self] ~= nil then
       return BooleanEnum[self]

@@ -6,10 +6,6 @@ Tag.__index = Tag
 
 local concat = table.concat
 
-function string:trim()
-    return self:gsub("^%s*(.-)%s*$", "%1")
-end
-
 ---@param name? string
 ---@param arguments? string
 ---@return Tag
@@ -23,6 +19,8 @@ function Tag.new(name, arguments)
 end
 
 ---@param tmpl string
+---@param vars table
+---@return string
 local function compile_blocks(tmpl, vars)
     repeat
         local s, e, b, n, a = tmpl:find("({%%%s+(%w+)%s+([^{}]*)%%})")
@@ -82,6 +80,9 @@ function Tag:compile(tmpl, vars)
     return compile_vars(compile_blocks(tmpl, vars), vars)
 end
 
+---@param tmpl string
+---@param vars table
+---@return string
 function Tag:render(tmpl, vars)
     return self:compile(tmpl, vars)
 end
