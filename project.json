@@ -5,5 +5,20 @@
   "name": "@wolfe-labs/STL",
   "description": "Smart Template Library (STL) is a simple, Twig-like templating language for Lua",
   "sourcePath": "src",
-  "outputPath": "out"
+  "outputPath": "out",
+  "builds": {
+    "test": {
+      "name": "test",
+      "type": "control",
+      "slots": {
+      }
+    }
+  },
+  "targets": {
+    "development": {
+      "name": "development",
+      "handleErrors": false,
+      "minify": false
+    }
+  }
 }
